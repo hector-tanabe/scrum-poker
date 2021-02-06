@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="row">
+    <mat-card class="flex-container" style="display: flex; flex-wrap: wrap;">
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">?</h1>
+          <button (click)="onUpdatePlayerCard('?')" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">0</h1>
+          <button (click)="onUpdatePlayerCard(0)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">0.5</h1>
+          <button (click)="onUpdatePlayerCard(0.5)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">1</h1>
+          <button (click)="onUpdatePlayerCard(1)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">2</h1>
+          <button (click)="onUpdatePlayerCard(2)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">3</h1>
+          <button (click)="onUpdatePlayerCard(3)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">5</h1>
+          <button (click)="onUpdatePlayerCard(5)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">8</h1>
+          <button (click)="onUpdatePlayerCard(8)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">13</h1>
+          <button (click)="onUpdatePlayerCard(13)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">20</h1>
+          <button (click)="onUpdatePlayerCard(20)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">40</h1>
+          <button (click)="onUpdatePlayerCard(40)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="my-card m-card">
+        <mat-card-content class="mat-card-content card-content">
+          <h1 style="text-align: center;">100</h1>
+          <button (click)="onUpdatePlayerCard(100)" class="mat-raised-button mat-primary" style="margin-top: 40%;">
+            <span class="mdc-button__label">Select</span>
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+    </mat-card>
+
+    <mat-card>
+      <mat-card-header><h3>Room's code: {{ roomId }}</h3></mat-card-header>
+      <mat-card-header><h1>Players</h1></mat-card-header>
+      <mat-card-content>
+        <button (click)="onShowPlayersSelection()" class="mat-raised-button mat-primary" style="margin-left: 2%; margin-right: 2%;">
+          <span class="mdc-button__label">Show selections</span>
+        </button>
+        <button (click)="onDeletePlayersSelection()" class="mat-raised-button mat-accent">
+          <span class="mdc-button__label">Delete selections</span>
+        </button>
+        <mat-table #table [dataSource]="players">
+
+          <!-- Name column -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+          <!-- Card column -->
+          <ng-container matColumnDef="card">
+            <mat-header-cell *matHeaderCellDef> Card </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div *ngIf="showSelections"> {{element.card}} </div>
+              <div *ngIf="!showSelections && element.card != '-'"> X </div>
+              <div *ngIf="!showSelections && element.card == '-'"> {{element.card}} </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

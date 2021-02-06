@@ -1,0 +1,58 @@
+<div class="row">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div class="col-md-6">
+    <mat-card>
+      <form [formGroup]="form" (submit)="onSaveRoom()" *ngIf="!isLoading">
+        <h2>Create a room</h2>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="creator"
+            placeholder="Your name">
+          <mat-error *ngIf="form.get('creator').invalid">Please enter your name.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="roomName"
+            placeholder="Room name">
+          <mat-error *ngIf="form.get('roomName').invalid">Please enter a name for your room.</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit">Create room</button>
+      </form>
+    </mat-card>
+  </div>
+  <div class="col-md-6">
+    <mat-card>
+      <!--<mat-spinner *ngIf="isLoading"></mat-spinner>-->
+      <form [formGroup]="formJoin" (submit)="onJoinRoom()" *ngIf="!isLoading">
+        <h2>Join to an existing room</h2>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="name"
+            placeholder="Your name">
+          <mat-error *ngIf="formJoin.get('name').invalid">Please enter your name.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="roomId"
+            placeholder="Room code">
+          <mat-error *ngIf="formJoin.get('roomId').invalid">Please enter a post title.</mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="accent"
+          type="submit">Join room</button>
+      </form>
+    </mat-card>
+  </div>
+</div>
