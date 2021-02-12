@@ -42,7 +42,7 @@ export class CreateRoomComponent implements OnInit {
         this.mode = 'edit';
         this.roomId = paramMap.get('roomId');
         this.isLoading = true;
-        this.roomsService.getRoom(this.roomId).subscribe(roomData => {
+        this.roomsService.getRoom2(this.roomId).subscribe(roomData => {
           this.isLoading = false;
           this.room = {
             id: roomData._id,
@@ -69,7 +69,7 @@ export class CreateRoomComponent implements OnInit {
     if (this.mode === 'create') {
       this.roomsService.addRoom(this.form.value.creator, this.form.value.roomName);
     } else {
-      this.roomsService.updateRoom(this.roomId, this.form.value.creator, this.form.value.roomName);
+      // this.roomsService.updateRoom(this.roomId, this.form.value.creator, this.form.value.roomName);
     }
     this.form.reset();
   }

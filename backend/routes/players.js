@@ -25,10 +25,6 @@ router.put("/:id/card/:card", (req, res, next) => {
     card: req.body.card,
     roomId: req.body.roomId
   })
-  /*Player.updateOne({_id: req.params.id, card: req.params.card}, player).then(result => {
-    console.log(result);
-    res.status(200).json({ message: "Update successful!"})
-  })*/
   Player.where('_id', player.id).updateOne({$set: {card: player.card}}).then(result => {
     res.status(200).json({ message: "Update successful!"})
   })

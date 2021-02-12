@@ -25,23 +25,8 @@ export class PlayersService {
   }
 
   getPlayers(roomId: string) {
-    // this.playersUpdated = new Subject<Player[]>();
-    // this.playersUpdated.next(null);
-    this.http.get<{message: string, players: any}>('http://localhost:3000/api/players/room/' + roomId)
-      .pipe(map((playerData) => {
-        return playerData.players.map(player => {
-          return {
-            name: player.name,
-            card: player.card,
-            id: player._id,
-            roomId: player.roomId
-          };
-        });
-      }))
-      .subscribe((transformedPlayer) => {
-        this.players = transformedPlayer;
-        this.playersUpdated.next([...this.players]);
-      });
+    const t = this.http.get('http://localhost:3000/api/players/room/' + roomId);
+    return t;
   }
 
   getPlayerUpdateListener() {
@@ -53,23 +38,11 @@ export class PlayersService {
     const newArr = [...this.players, player];
     console.log(...this.players);
     this.playersUpdated.next(newArr);
-    // this.playersUpdated.next([...this.players]);
   }
 
   deletePlayerListener() {
-    // this.players = players;
     this.playersUpdated = new Subject<Player[]>();
-    // this.playersUpdated.complete();
-    // this.playersUpdated = new Subject<Player[]>();
-    // this.playersUpdated.next();
-    // this.playersUpdated.unsubscribe();
-    // this.playersUpdated.next([...this.players]);
   }
-
-  /*getRoom(id: string) {
-    // return {...this.posts.find(p => p.id === id)};
-    return this.http.get<{_id: string; creator: string; roomName: string}>('http://localhost:3000/api/players/' + id);
-  }*/
 
   addPlayer(name: string, roomId: string) {
     const player: Player = {id: null, name: name, card: '-', roomId: roomId};
@@ -77,8 +50,6 @@ export class PlayersService {
       .subscribe((responseData) => {
         const id = responseData.playerId;
         player.id = id;
-        // this.players.push(player);
-        // this.playersUpdated.next([...this.players]);
         this.saveSession(player);
         this.router.navigate(['room/' + roomId]);
       });

@@ -50,8 +50,13 @@ export class RoomsService {
     return this.roomsUpdated.asObservable();
   }
 
+  getRoom2(id: string) {
+    return this.http.get<{_id: string; creator: string; roomName: string; creatorId: string; show: string}>
+    ('http://localhost:3000/api/rooms/' + id);
+  }
+
   getRoom(id: string) {
-    return this.http.get<{_id: string; creator: string; roomName: string}>('http://localhost:3000/api/rooms/' + id);
+    return this.http.get('http://localhost:3000/api/rooms/' + id);
   }
 
   async addRoom(creator: string, roomName: string) {
@@ -68,14 +73,17 @@ export class RoomsService {
           const playerId = responseDataPlayer.playerId;
           player.id = playerId;
           this.saveSession(player);
-          this.router.navigate(['room/' + id]);
+          room.creatorId = playerId;
+          this.http.put<{message: string, id: string}>('http://localhost:3000/api/rooms/' + id, room)
+            .subscribe((responseDataRoom) => {
+            this.router.navigate(['room/' + id]);
+          });
         });
-        // this.router.navigate(['/']);
       });
   }
 
-  updateRoom(id: string, creator: string, roomName: string) {
-    const room: Room = {id: id, creator: creator, roomName: roomName};
+  updateRoom(id: string, creatorId: string, creator: string, roomName: string, show: boolean) {
+    const room: Room = {id: id, creatorId: creatorId, creator: creator, roomName: roomName, show: show};
     this.http.put('http://localhost:3000/api/rooms/' + id, room)
       .subscribe(response => {
         const updatedPosts = [...this.rooms];
@@ -84,6 +92,20 @@ export class RoomsService {
         this.rooms = updatedPosts;
         this.roomsUpdated.next([...this.rooms]);
         this.router.navigate(['/']);
+      });
+  }
+
+  updateRoomShow(id: string, show: Boolean) {
+    const room: Room = {id: id, show: show};
+    console.log(room);
+    this.http.put('http://localhost:3000/api/rooms/' + id + '/show', room)
+      .subscribe(response => {
+        // const updatedPosts = [...this.rooms];
+        // const oldPostIndex = updatedPosts.findIndex(p => p.id === room.id);
+        // updatedPosts[oldPostIndex] = room;
+        // this.rooms = updatedPosts;
+        // this.roomsUpdated.next([...this.rooms]);
+        // this.router.navigate(['/']);
       });
   }
 

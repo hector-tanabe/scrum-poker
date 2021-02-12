@@ -1,5 +1,7 @@
 export interface Room {
   id: string;
-  creator: string;
-  roomName: string;
+  creatorId?: string;
+  creator?: string;
+  roomName?: string;
+  show?: Boolean;
 }

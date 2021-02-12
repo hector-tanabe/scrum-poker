@@ -115,13 +115,16 @@
       <mat-card-header><h3>Room's code: {{ roomId }}</h3></mat-card-header>
       <mat-card-header><h1>Players</h1></mat-card-header>
       <mat-card-content>
-        <button (click)="onShowPlayersSelection()" class="mat-raised-button mat-primary" style="margin-left: 2%; margin-right: 2%;">
+        <button (click)="onShowPlayersSelection()" *ngIf="!showSelections && room.creatorId == session.id" class="mat-raised-button mat-primary" style="margin-left: 2%; margin-right: 2%;">
           <span class="mdc-button__label">Show selections</span>
         </button>
-        <button (click)="onDeletePlayersSelection()" class="mat-raised-button mat-accent">
+        <button (click)="onHidePlayersSelection()" *ngIf="showSelections && room.creatorId == session.id" class="mat-raised-button mat-primary" style="margin-left: 2%; margin-right: 2%;">
+          <span class="mdc-button__label">Hide selections</span>
+        </button>
+        <button (click)="onDeletePlayersSelection()" *ngIf="room.creatorId == session.id" class="mat-raised-button mat-accent">
           <span class="mdc-button__label">Delete selections</span>
         </button>
-        <mat-table #table [dataSource]="players">
+        <mat-table #table [dataSource]="dataSource">
 
           <!-- Name column -->
           <ng-container matColumnDef="name">
